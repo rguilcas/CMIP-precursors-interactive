@@ -1,0 +1,1 @@
+https://mybinder.org/v2/gh/rguilcas/CMIP-precursors-interactive/HEAD?urlpath=panel/panel_app
