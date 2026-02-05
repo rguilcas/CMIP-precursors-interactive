@@ -15,7 +15,7 @@ pn.extension(design="material", sizing_mode="stretch_width")
 def get_data():
     ds1= xr.open_dataset("data/LENS_precomputed_terms_combined.nc")
     gdf_regions = gpd.read_file('data/rainfall_regions.geojson',).set_index('index')
-    ds1 = ds1.assign_coords(region_id = gdf_regions.index)
+    ds1 = ds1.assign_coords(region_id = gdf_regions.index.values)
     ds1 = xr.concat([ds1,ds1.sum('source').assign_coords(source='all')], dim='source') 
     
     # gdf_regions.index = [K39_regions[k] for k in gdf_regions.index]
@@ -24,6 +24,7 @@ def get_data():
     return ds1, gdf_regions
 
 ds1, gdf_regions = get_data()
+# data.tail()
 # data.tail()
 
 
