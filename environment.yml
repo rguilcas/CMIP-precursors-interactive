@@ -4,6 +4,7 @@ channels:
 
 packages:
 - jupyter-panel-proxy
+- panel
 - geopandas
 - xarray 
 - numpy
