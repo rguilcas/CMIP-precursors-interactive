@@ -1,0 +1,16 @@
+channels:
+- pyviz
+- conda-forge 
+
+packages:
+- jupyter-panel-proxy
+- geopandas
+- xarray 
+- numpy
+- hvplot
+- pandas
+- panel
+- shapely
+- affine
+- geoviews
+- holoviews
