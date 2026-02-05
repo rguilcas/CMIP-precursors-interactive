@@ -1,17 +1,16 @@
+name: cmip6env
 channels:
-- pyviz
-- conda-forge 
-
-packages:
-- jupyter-panel-proxy
-- panel
-- geopandas
-- xarray 
-- numpy
-- hvplot
-- pandas
-- panel
-- shapely
-- affine
-- geoviews
-- holoviews
+  - conda-forge
+dependencies:
+  - python=3.10
+  - panel
+  - jupyter-panel-proxy  # <--- ADD THIS
+  - xarray
+  - netcdf4
+  - geopandas
+  - xarray 
+  - numpy
+  - hvplot
+  - pandas
+  - geoviews
+  - holoviews
