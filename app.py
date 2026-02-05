@@ -14,7 +14,7 @@ pn.extension(design="material", sizing_mode="stretch_width")
 @pn.cache
 def get_data():
     ds1= xr.open_dataset("data/LENS_precomputed_terms_combined.nc")
-    gdf_regions = gpd.read_file('data/rainfall_regions.geojson')
+    gdf_regions = gpd.read_file('data/rainfall_regions.geojson',).set_index('index')
     ds1 = ds1.assign_coords(region_id = gdf_regions.index)
     ds1 = xr.concat([ds1,ds1.sum('source').assign_coords(source='all')], dim='source') 
     
@@ -41,8 +41,8 @@ def get_plot(model='CESM2', season='DJF', term='bias', source='dyn', vmax=50):
     # hover = HoverTool(tooltips=tooltips)
     hover = HoverTool(tooltips = [('@index', '@term')])
     poly_plot = gdf.hvplot.polygons( crs=ccrs.PlateCarree(), color=term)\
-        .opts(height=800, 
-              width=800, 
+        .opts(height=600, 
+              width=600, 
               # tools=['hover'],
               tools=['tap', 'hover'],  # Ensure tap is here
               # selection_mode='single',   # Or 'multiple'
