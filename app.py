@@ -39,7 +39,7 @@ def get_plot(model='CESM2', season='DJF', term='bias', source='dyn', vmax=50):
     gdf[term] = ds_sel.individual_term.to_series()
     
     # hover = HoverTool(tooltips=tooltips)
-    hover = HoverTool(tooltips = [('@index', '@term')])
+    # hover = HoverTool(tooltips = [('@index', '@term')])
     poly_plot = gdf.hvplot.polygons( crs=ccrs.PlateCarree(), color=term)\
         .opts(height=600, 
               width=600, 
@@ -60,7 +60,7 @@ def get_plot(model='CESM2', season='DJF', term='bias', source='dyn', vmax=50):
         if not index:
             return "### Please select a region"
         # print(index)
-        regions = gdf.iloc[index].index
+        regions = list(gdf.iloc[index].index)
         region_names='  \n'+'  \n'.join(regions)
         # data=gdf.loc[index].index
         ds_sel_barplot = (
@@ -68,6 +68,7 @@ def get_plot(model='CESM2', season='DJF', term='bias', source='dyn', vmax=50):
                 .sel(model=model, season=season, term=term,  region_id=regions)
                 .sum("synoptic_bin") / 0.05 * 100
             ).individual_term
+        return ds_sel_barplot
         series =  ds_sel_barplot.to_series()#
         series.index = series.index.reorder_levels([1,0])
         bars = series.hvplot.bar(title=term)
