@@ -1,1 +1,1 @@
-https://mybinder.org/v2/gh/rguilcas/CMIP-precursors-interactive/HEAD?urlpath=panel/panel_app
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/rguilcas/CMIP-precursors-interactive/main?urlpath=panel/panel_app)
