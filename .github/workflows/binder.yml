@@ -1,0 +1,23 @@
+name: Build Binder Image
+on: 
+  push:
+    branches: [ main, master ] # Triggers on push to your main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout files in repo
+      uses: actions/checkout@v3
+
+    - name: Build and Push to Binder Cache
+      uses: jupyterhub/repo2docker-action@master
+      with:
+        # This builds the image and pushes it to mybinder.org cache 
+        # so users don't have to wait for the build when they click the link.
+        NO_PUSH: 'false'
+        MYBINDERORG_CACHE: 'true'
+        # Optional: If you want to push to DockerHub as well, uncomment these:
+        # DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        # DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
