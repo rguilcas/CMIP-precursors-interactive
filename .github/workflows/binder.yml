@@ -10,10 +10,13 @@ jobs:
     - name: Checkout files in repo
       uses: actions/checkout@v3
 
-    - name: Build and Cache for Binder
+    - name: Build and Push to DockerHub
       uses: jupyterhub/repo2docker-action@master
       with:
-        NO_PUSH: 'true'
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         BINDER_CACHE: 'true'
-        # Setting this to true prevents the action from committing a Dockerfile
+        PUBLIC_REGISTRY_CHECK: 'true'
+        # Important: This keeps your repo clean of auto-generated Dockerfiles
         NO_GIT_PUSH: 'true'
+
