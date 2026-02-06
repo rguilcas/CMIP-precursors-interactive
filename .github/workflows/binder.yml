@@ -1,7 +1,7 @@
 name: Build Binder Image
 on: 
   push:
-    branches: [ main, master ] # Triggers on push to your main branch
+    branches: [ main, master ]
 
 jobs:
   build:
@@ -11,13 +11,12 @@ jobs:
     - name: Checkout files in repo
       uses: actions/checkout@v3
 
-    - name: Build and Push to Binder Cache
+    - name: Build and Cache for Binder
       uses: jupyterhub/repo2docker-action@master
       with:
-        # This builds the image and pushes it to mybinder.org cache 
-        # so users don't have to wait for the build when they click the link.
-        NO_PUSH: 'false'
-        MYBINDERORG_CACHE: 'true'
-        # Optional: If you want to push to DockerHub as well, uncomment these:
-        # DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        # DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        # NO_PUSH: 'true' prevents the "Access Denied" error at Docker Hub
+        NO_PUSH: 'true'
+        # BINDER_CACHE: 'true' triggers the MyBinder.org build
+        BINDER_CACHE: 'true'
+        # This is the public URL of your repo for the Binder API
+        PUBLIC_REGISTRY_CHECK: 'true'
