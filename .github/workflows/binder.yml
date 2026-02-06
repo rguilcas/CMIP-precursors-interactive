@@ -7,16 +7,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
     - name: Checkout files in repo
       uses: actions/checkout@v3
 
     - name: Build and Cache for Binder
       uses: jupyterhub/repo2docker-action@master
       with:
-        # NO_PUSH: 'true' prevents the "Access Denied" error at Docker Hub
         NO_PUSH: 'true'
-        # BINDER_CACHE: 'true' triggers the MyBinder.org build
         BINDER_CACHE: 'true'
-        # This is the public URL of your repo for the Binder API
-        PUBLIC_REGISTRY_CHECK: 'true'
+        # Setting this to true prevents the action from committing a Dockerfile
+        NO_GIT_PUSH: 'true'
